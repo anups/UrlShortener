@@ -1,0 +1,21 @@
+
+{% extends "urlapp/base.html" %}
+
+{% block title %} Shorter URL Application {% endblock %}
+
+{% block content %}
+
+   <div id="container">
+       <p>Please Enter Full URL with http://</p>
+       <form action="." method="post">
+           {{ url_post_form.as_p }}
+           {% csrf_token %}
+           <p><input type="submit" value="Submit"></p>
+       </form>
+       {% if url_post != None %}
+         <p>Shorter URl: <a href="{{ url_post.original_url }}" target="_blank">sht.bit/{{ url_post.short_url }}</a></p>
+         <p><input type="hidden" name="expired_at" value="{{ url_post.expired_at }}" id="expired_at"></p>
+       {% endif %}
+   </div>
+
+{% endblock %}
